@@ -37,11 +37,4 @@ Authentication and more advanced detection features will be added later.
 
 ---
 
-## Disclaimer
-
-This app is an experiment and should not be fully relied on for safety.  
-Always drive responsibly and take regular breaks.
-
----
-
 **Made with care for safer roads.**
