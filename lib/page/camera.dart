@@ -67,6 +67,7 @@ class _CameraScreenState extends State<CameraScreen> {
       camera,
       ResolutionPreset.medium,
       enableAudio: false,
+      imageFormatGroup: ImageFormatGroup.nv21,
     );
 
     _controller!.initialize().then((_) {

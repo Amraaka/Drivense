@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'page/camera.dart';
+import 'page/homePage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,13 +8,15 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Camera Switch Demo',
+      title: 'Drivense Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const CameraScreen(),
+      // home: const CameraScreen(),
+      home: const HomePage(),
     );
   }
 }
