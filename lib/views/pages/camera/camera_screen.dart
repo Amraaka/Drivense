@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-import 'camera_controller_service.dart';
+import '../../../views/pages/camera/camera_controller_service.dart';
 import 'face_detection_service.dart';
-import 'image_converter.dart';
+import '../../../views/pages/camera/image_converter.dart';
 import 'face_box_painter.dart';
 
 class CameraScreen extends StatefulWidget {
@@ -18,6 +18,7 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen> {
   final _cameraService = CameraControllerService();
   final _faceDetectionService = FaceDetectionService();
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   List<CameraDescription> _cameras = [];
   int _selectedCameraIndex = 0;
@@ -31,37 +32,34 @@ class _CameraScreenState extends State<CameraScreen> {
 
   Future<void> _initCamera() async {
     _cameras = await availableCameras();
-
     final frontIndex = _cameras.indexWhere(
       (camera) => camera.lensDirection == CameraLensDirection.front,
     );
     if (frontIndex != -1) {
       _selectedCameraIndex = frontIndex;
     }
-
     await _cameraService.initializeController(
       _cameras[_selectedCameraIndex],
       onImage: _processCameraImage,
     );
-
     if (mounted) setState(() {});
   }
 
   Future<void> _processCameraImage(CameraImage image) async {
     if (_isDetecting) return;
     _isDetecting = true;
-
     final inputImage = convertToInputImage(
       image,
       _cameras[_selectedCameraIndex],
       defaultTargetPlatform,
     );
-
     if (inputImage != null) {
       await _faceDetectionService.processImage(inputImage);
+      if (_faceDetectionService.isEyeClosedTooLong) {
+        await _audioPlayer.play(AssetSource('assets/audio/warning.mp3'));
+      }
       setState(() {});
     }
-
     _isDetecting = false;
   }
 
@@ -79,6 +77,7 @@ class _CameraScreenState extends State<CameraScreen> {
   void dispose() {
     _cameraService.dispose();
     _faceDetectionService.dispose();
+    _audioPlayer.dispose();
     super.dispose();
   }
 
@@ -88,7 +87,6 @@ class _CameraScreenState extends State<CameraScreen> {
     if (controller == null || !controller.value.isInitialized) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
-
     return Scaffold(
       body: Stack(
         children: [
@@ -128,10 +126,19 @@ class _CameraScreenState extends State<CameraScreen> {
             left: 0,
             right: 0,
             child: Center(
-              child: ElevatedButton.icon(
-                onPressed: _switchCamera,
-                icon: const Icon(Icons.switch_camera),
-                label: const Text('Switch Camera'),
+              // child: ElevatedButton.icon(
+              //   onPressed: _switchCamera,
+              //   icon: const Icon(Icons.switch_camera),
+              //   label: const Text('Switch Camera'),
+              // ),
+              child: ElevatedButton(
+                onPressed: () async {
+                  await _audioPlayer.play(
+                    AssetSource('assets/audio/warning.mp3'),
+                  );
+                  debugPrint('Sound should be playing now');
+                },
+                child: const Text("Test Sound"),
               ),
             ),
           ),

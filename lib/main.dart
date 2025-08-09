@@ -1,5 +1,6 @@
+import 'package:drivense/data/notifiers.dart';
+import 'package:drivense/views/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
-import 'page/homePage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,12 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Drivense Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      // home: const CameraScreen(),
-      home: const HomePage(),
+    return ValueListenableBuilder(
+      valueListenable: isDarkModeNotifier,
+      builder: (context, isDarkMode, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            useMaterial3: true,
+            brightness: isDarkMode == true ? Brightness.dark : Brightness.light,
+          ),
+          home: const WelcomePage(),
+        );
+      },
     );
   }
 }

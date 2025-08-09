@@ -200,6 +200,9 @@ class _CameraScreenState extends State<CameraScreen> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Monitoring"),
+      ),
       body: Stack(
         children: [
           Center(
