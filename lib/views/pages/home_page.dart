@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'camera/camera_screen.dart';
+// import 'camera/camera_screen.dart';
+import 'camera.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
