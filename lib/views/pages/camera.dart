@@ -132,13 +132,13 @@ class _CameraScreenState extends State<CameraScreen> {
     String message = "";
     if (rotY != null && rotX != null) {
       if (rotY > headTurnThreshold) {
-        message = "Looking Right";
+        message = "Баруун тийш харж байна";
       } else if (rotY < -headTurnThreshold) {
-        message = "Looking Left";
+        message = "Зүүн тийш харж байна";
       } else if (rotX > headTurnThreshold) {
-        message = "Looking Up";
+        message = "Дээшээ харж байна";
       } else if (rotX < -headTurnThreshold) {
-        message = "Looking Down";
+        message = "Доошоо харж байна";
       }
     }
     _detectionMessage = message.isNotEmpty ? message : null;
@@ -253,7 +253,7 @@ class _CameraScreenState extends State<CameraScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                'Drowsiness Alert: Eyes closed for too long!',
+                'Анхааруулга! зүүрмэглэж байна',
                 style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
@@ -262,7 +262,7 @@ class _CameraScreenState extends State<CameraScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
-                'Notice: $_detectionMessage',
+                'Анхааруулга: $_detectionMessage',
                 style: TextStyle(
                     color: Colors.yellow,
                     fontSize: 18,
