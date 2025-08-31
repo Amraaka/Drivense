@@ -21,11 +21,6 @@ Most existing safety measures focus on **post-accident response** rather than **
   - 📱 **Mobile phone usage**
   - 👀 **Distraction / looking away from the road**
 - **Instant Alerts** (sound, vibration, or visual cues) to regain driver focus.
-- **GPS Tracking** for trip monitoring and safety records.
-- 📞 **Emergency Call Function** in case of accidents.
-- 📊 **Driver Performance Analytics** with graphical reports for safety improvement.
-- **Future Upgrade:** Emotion & stress-level monitoring for proactive risk prevention.
-
 ---
 
 ## 🛠 Tech Stack
@@ -37,8 +32,3 @@ Most existing safety measures focus on **post-accident response** rather than **
 - **Other Tools:**  
   - Camera plugin for real-time video stream analysis
   - Location services for GPS tracking
-
----
-
-## 📂 Project Structure
-
